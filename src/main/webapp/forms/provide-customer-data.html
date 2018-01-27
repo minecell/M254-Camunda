@@ -1,0 +1,55 @@
+<form name="customerForm" role="form">
+
+  <script cam-script type="text/form-script">
+
+    // angular form works on scope object
+    var customerData = $scope.customerData = {
+    };
+
+    /**
+     * cam form lifecycle hooks
+    */
+
+    camForm.on('form-loaded', function() {
+
+      // declare variable 'customerData' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'customerData',
+        type: 'Object',
+        value: customerData,
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'org.camunda.bpm.example.usertask.embedded.serialized.model.CustomerData'
+        }
+      });
+
+    });
+
+  </script>
+
+  <h3>Customer Data</h3>
+
+  <div class="control-group">
+    <label class="control-label" for="answer1">Firstname</label>
+    <div class="controls">
+      <input id="answer1"
+             class="form-control"
+             type="text"
+             required 
+             ng-model="customerData.answer1">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="answer2">Lastname</label>
+    <div class="controls">
+      <input id="answer2"
+             class="form-control"
+             type="text"
+             required
+             ng-model="customerData.answer2">
+    </div>
+  </div>
+</form>
