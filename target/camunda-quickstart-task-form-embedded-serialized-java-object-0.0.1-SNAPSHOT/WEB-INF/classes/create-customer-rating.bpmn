@@ -10,14 +10,19 @@
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="ServiceTask_1" />
     <bpmn2:endEvent id="EndEvent_1">
-      <bpmn2:incoming>SequenceFlow_1mbae5l</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:userTask id="UserTask_1" name="Calculate Rating&#10;Manually" camunda:formKey="embedded:app:forms/manual-rating.html">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_1mbae5l</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_1e8acnu</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="ServiceTask_1" targetRef="UserTask_1" />
-    <bpmn2:sequenceFlow id="SequenceFlow_1mbae5l" sourceRef="UserTask_1" targetRef="EndEvent_1" />
+    <bpmn2:serviceTask id="ServiceTask_2" name="Process Rating" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:class="org.camunda.bpm.example.usertask.embedded.serialized.delegate.ProcessRating">
+      <bpmn2:incoming>SequenceFlow_1e8acnu</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="ServiceTask_2" targetRef="EndEvent_1" />
+    <bpmn2:sequenceFlow id="SequenceFlow_1e8acnu" sourceRef="UserTask_1" targetRef="ServiceTask_2" />
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="createRating">
@@ -32,26 +37,38 @@
         <di:waypoint xsi:type="dc:Point" x="190" y="238" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="EndEvent_1">
-        <dc:Bounds x="590" y="220" width="36" height="36" />
+        <dc:Bounds x="826" y="219" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="563" y="256" width="90" height="20" />
+          <dc:Bounds x="799" y="255" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="UserTask_1">
-        <dc:Bounds x="380" y="198" width="100" height="80" />
+        <dc:Bounds x="443" y="198" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3">
         <di:waypoint xsi:type="dc:Point" x="290" y="238" />
-        <di:waypoint xsi:type="dc:Point" x="380" y="238" />
+        <di:waypoint xsi:type="dc:Point" x="365" y="238" />
+        <di:waypoint xsi:type="dc:Point" x="365" y="238" />
+        <di:waypoint xsi:type="dc:Point" x="443" y="238" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="290" y="213" width="90" height="20" />
+          <dc:Bounds x="335" y="228" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1mbae5l_di" bpmnElement="SequenceFlow_1mbae5l">
-        <di:waypoint xsi:type="dc:Point" x="480" y="238" />
-        <di:waypoint xsi:type="dc:Point" x="590" y="238" />
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="ServiceTask_2">
+        <dc:Bounds x="676" y="197" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8">
+        <di:waypoint xsi:type="dc:Point" x="776" y="237" />
+        <di:waypoint xsi:type="dc:Point" x="826" y="237" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="535" y="217" width="0" height="12" />
+          <dc:Bounds x="756" y="212" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1e8acnu_di" bpmnElement="SequenceFlow_1e8acnu">
+        <di:waypoint xsi:type="dc:Point" x="543" y="238" />
+        <di:waypoint xsi:type="dc:Point" x="676" y="237" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="609.5" y="216.5" width="0" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

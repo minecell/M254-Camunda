@@ -14,13 +14,31 @@
     });
 
   </script>
-
-  <p class="lead">Please provide a rating for the following customer</p>
-
-  <div>
-    <address>
-      <strong>{{customerData.answer1}} {{customerData.answer2}}</strong><br>
-    </address>
-  </div>
-  <br>
+  <div class="form-group" >
+		<h2>Was ist ein Nomen?</h2>
+		<b>Antwort des Schülers:</b>
+		<p id="answer1a">{{customerData.answer1}}</p>
+		<b>Lösung:</b>
+		<p>Hauptwort, beschreibt die Instanz eines Objekts oder Subjekts (z.B. der Löffel, der Nachbar).</p>
+		<b>Punkte:</b>
+		<input type="number" min="0" max="4" name="answer1points" ng-model="customerData.answer1points" value="0">
+	</div>
+	<div class="form-group">
+		<h2 >Was ist ein Verb?</h2>
+		<b>Antwort des Schülers:</b>
+		<p id="answer2a">{{customerData.answer2}}</p>
+		<b>Lösung:</b>
+		<p>Verben beschreiben Vorgänge, Handlungen und Zustände.</p>
+		<b>Punkte:</b>
+		<input type="number" min="0" max="4" name="answer2points" ng-model="customerData.answer2points" value="0">
+	</div>
+	<div class="form-group">
+		<h2>Was ist ein Adjektiv?</h2>
+		<b>Antwort des Schülers:</b>
+		<p id="answer3a">{{customerData.answer3}}</p>
+		<b>Lösung:</b>
+		<p>Adjektive beschreiben Eigenschaften und werden daher als Eigenschaftswörter bezeichnet.</p>
+		<b>Punkte:</b>
+		<input type="number" min="0" max="4" name="answer3points" ng-model="customerData.answer3points" value="0">
+	</div>
 </form>
