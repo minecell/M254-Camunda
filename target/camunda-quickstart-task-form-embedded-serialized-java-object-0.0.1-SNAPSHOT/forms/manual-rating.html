@@ -1,4 +1,26 @@
-<form name="manualRating" role="form">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$('#answer1points').on('input', function() {
+	    localStorage.setItem("answer1points", $("#answer1points").val());
+	});
+	$('#answer2points').on('input', function() {
+	    localStorage.setItem("answer2points", $("#answer2points").val());
+	});
+	$('#answer3points').on('input', function() {
+	    localStorage.setItem("answer3points", $("#answer3points").val());
+	});
+
+	var answer1 = localStorage.getItem("answer1");
+	var answer2 = localStorage.getItem("answer2");
+	var answer3 = localStorage.getItem("answer3");
+
+	$("#answer1").html(answer1);
+	$("#answer2").html(answer2);
+	$("#answer3").html(answer3);
+</script>
+
+
+<form name="customerForm" role="form">
 
   <script cam-script type="text/form-script">
 
@@ -13,33 +35,67 @@
       $scope.customerData = camForm.variableManager.variable('customerData').value;
     });
 
+    camForm.variableManager.createVariable({
+        name: 'answer1points',
+        type: 'String',
+        value: $("#answer1points").val(),
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'java.lang.String'
+        }
+      });
+      camForm.variableManager.createVariable({
+        name: 'answer2points',
+        type: 'String',
+        value: $("#answer2points").val(),
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'java.lang.String'
+        }
+      });
+      camForm.variableManager.createVariable({
+        name: 'answer3points',
+        type: 'String',
+        value: $("#answer3points").val(),
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'java.lang.String'
+        }
+      });
+
   </script>
   <b>{{customerData.name}}</b>
   <div class="form-group" >
 		<h2>Was ist ein Nomen?</h2>
 		<b>Antwort des Schülers:</b>
-		<p id="answer1a">{{customerData.answer1}}</p>
+		<p id="answer1">{{customerData.answer1}}</p>
 		<b>Lösung:</b>
 		<p>Hauptwort, beschreibt die Instanz eines Objekts oder Subjekts (z.B. der Löffel, der Nachbar).</p>
 		<b>Punkte:</b>
-		<input type="number" min="0" max="4" name="answer1points" ng-model="customerData.answer1points" value="0">
+		<input type="number" min="0" max="4" id="answer1points" ng-model="customerData.answer1points" value="0">
 	</div>
 	<div class="form-group">
 		<h2 >Was ist ein Verb?</h2>
 		<b>Antwort des Schülers:</b>
-		<p id="answer2a">{{customerData.answer2}}</p>
+		<p id="answer2">{{customerData.answer2}}</p>
 		<b>Lösung:</b>
 		<p>Verben beschreiben Vorgänge, Handlungen und Zustände.</p>
 		<b>Punkte:</b>
-		<input type="number" min="0" max="4" name="answer2points" ng-model="customerData.answer2points" value="0">
+		<input type="number" min="0" max="4" id="answer2points" ng-model="customerData.answer2points" value="0">
 	</div>
 	<div class="form-group">
 		<h2>Was ist ein Adjektiv?</h2>
 		<b>Antwort des Schülers:</b>
-		<p id="answer3a">{{customerData.answer3}}</p>
+		<p id="answer3">{{customerData.answer3}}</p>
 		<b>Lösung:</b>
 		<p>Adjektive beschreiben Eigenschaften und werden daher als Eigenschaftswörter bezeichnet.</p>
 		<b>Punkte:</b>
-		<input type="number" min="0" max="4" name="answer3points" ng-model="customerData.answer3points" value="0">
+		<input type="number" min="0" max="4" id="answer3points" ng-model="customerData.answer3points" value="0">
 	</div>
 </form>

@@ -32,6 +32,7 @@ public class CustomerData {
 	protected int answer2points;
 	protected int answer3points;
 	protected String name;
+	
 	public String getAnswer1() {
 		return answer1;
 	}
@@ -52,7 +53,7 @@ public class CustomerData {
 		return answer3;
 	}
 
-	public void setAnswer3(String answer3) {
+	public void setanswer3(String answer3) {
 		this.answer3 = answer3;
 	}
 /*********************************************************/

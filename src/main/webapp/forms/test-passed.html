@@ -1,3 +1,41 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$('#answer1points').on('input', function() {
+	    localStorage.setItem("answer1points", $("#answer1points").val())
+	});
+	$('#answer2points').on('input', function() {
+	    localStorage.setItem("answer2points", $("#answer2points").val())
+	});
+	$('#answer3points').on('input', function() {
+	    localStorage.setItem("answer3points", $("#answer3points").val())
+	});
+	var answer1points = parseInt(localStorage.getItem("answer1points"));
+	var answer2points = parseInt(localStorage.getItem("answer2points"));
+	var answer3points = parseInt(localStorage.getItem("answer3points"));
+
+	var answerTotal = answer1points + answer2points + answer3points;
+	$("#reachedPoints").html(answerTotal);
+</script>
+
 <h1>BPMN Basic Test</h1>
 <h3>Basic Test bestanden</h3>
-du hast von möglichen Punkten erreicht.
+Du hast <span id="reachedPoints"></span> von 12 möglichen Punkten erreicht.
+
+<form name="manualRating" role="form">
+
+  <script cam-script type="text/form-script">
+
+    camForm.on('form-loaded', function() {
+      // fetch the variable named 'customerData'
+      camForm.variableManager.fetchVariable('customerData');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of customerData to a angular
+      // scope value such that the form can work on it
+      $scope.customerData = camForm.variableManager.variable('customerData').value;
+    });
+
+  </script>
+  <p>a</p>
+</form>

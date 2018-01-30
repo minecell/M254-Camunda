@@ -1,30 +1,65 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $('#answer1').on('input', function() {
+      localStorage.setItem("answer1", $("#answer1").val())
+  });
+  $('#answer2').on('input', function() {
+      localStorage.setItem("answer2", $("#answer2").val())
+  });
+  $('#answer3').on('input', function() {
+      localStorage.setItem("answer3", $("#answer3").val())
+  });
+</script>
+
 <form name="customerForm" role="form">
 
   <script cam-script type="text/form-script">
 
-    // angular form works on scope object
-    var customerData = $scope.customerData = {
-    };
-
-    /**
-     * cam form lifecycle hooks
-    */
-
     camForm.on('form-loaded', function() {
+      // fetch the variable named 'customerData'
+      camForm.variableManager.fetchVariable('customerData');
+    });
 
-      // declare variable 'customerData' incuding metadata for serialization
-      camForm.variableManager.createVariable({
-        name: 'customerData',
-        type: 'Object',
-        value: customerData,
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of customerData to a angular
+      // scope value such that the form can work on it
+      $scope.customerData = camForm.variableManager.variable('customerData').value;
+    });
+
+    camForm.variableManager.createVariable({
+        name: 'answer1',
+        type: 'String',
+        value: $("#answer1").val(),
         valueInfo: {
           // indicate that object is serialized as json
           serializationDataFormat: 'application/json',
           // provide classname of java object
-          objectTypeName: 'org.camunda.bpm.example.usertask.embedded.serialized.model.CustomerData'
+          objectTypeName: 'java.lang.String'
         }
       });
 
+    camForm.variableManager.createVariable({
+      name: 'answer2',
+      type: 'String',
+      value: $("#answer2").val(),
+      valueInfo: {
+        // indicate that object is serialized as json
+        serializationDataFormat: 'application/json',
+        // provide classname of java object
+        objectTypeName: 'java.lang.String'
+      }
+    });
+
+    camForm.variableManager.createVariable({
+      name: 'answer3',
+      type: 'String',
+      value: $("#answer3").val(),
+      valueInfo: {
+        // indicate that object is serialized as json
+        serializationDataFormat: 'application/json',
+        // provide classname of java object
+        objectTypeName: 'java.lang.String'
+      }
     });
   
   </script>
@@ -53,7 +88,7 @@
   </div>
   
     <div class="control-group">
-    <label class="control-label" for="answer2">Was ist ein Adjektiv?<slabel>
+    <label class="control-label" for="answer3">Was ist ein Adjektiv?</label>
     <div class="controls">
       <input id="answer3"
              class="form-control"

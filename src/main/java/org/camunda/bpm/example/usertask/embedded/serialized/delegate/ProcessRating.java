@@ -35,7 +35,22 @@ public class ProcessRating implements JavaDelegate {
     float max = 12.0f;
     float current = (float)customerData.getAnswer1points() + (float)customerData.getAnswer2points() + (float)customerData.getAnswer3points();
     
+    /*LOG.info("a1: " + (float)customerData.getAnswer1points());
+    LOG.info("a2: " + (float)customerData.getAnswer2points());
+    LOG.info("a3: " + (float)customerData.getAnswer3points());*/
+    
     float currentPercent = (current / max)*100;
+    
+    Object test = execution.getVariable("test");
+    LOG.info("TESTESTTEST: test ist " + (String) test);
+    
+    //-----------------------------------------
+    
+    execution.setVariable("points", current);
+    
+    
+    //-----------------------------------------
+    
     
     LOG.info(Float.toString(current) + " von " + Float.toString(max));
     LOG.info(Float.toString(currentPercent) + "%");
