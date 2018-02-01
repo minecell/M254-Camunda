@@ -1,20 +1,20 @@
 # Camunda
 
-In diesem Beispiel geht es darum mithilfe von Camunda TODO in die tat umsetzen
+In diesem Beispiel geht es darum mithilfe von Camunda TODO's in die Tat umsetzen
 
 ## BPMN für dieses Beispiel
 
-![Create customer rating process](src/main/resources/create-customer-rating.png)
+![Ablauf einer Prüfung](src/main/resources/create-customer-rating.png)
 
-Im ersten Formular gibt der Lehrer den Namen des Schülers eingeben.
-Als nächstes erhält der Schüler eine Prüfung mit bei der er eigene Antworten formulieren muss. 
+Im ersten Formular gibt der Lehrer den Namen des Schülers ein.
+Als nächstes erhält der Schüler eine Prüfung, bei der er seine Antworten frei formulieren muss. 
 Danach kann der Lehrer die Antworten des Schülers mit seinen Lösungen vergleichen und 0 bis 4 Punkte pro Antwort vergeben.
 Im nächsten Schritt berechnet ein Script ob der Schüler mindestens 75% der maximalen Punktzahl erreicht hat.
-Beim Gateway wird entschieden ob der Schüler sein Zertifikat erhält oder ob er eine Mittelung erhält die im mitteilt das er die Prüfung leider nicht bestanden hat.
+Beim Gateway wird entschieden, ob der Schüler sein Zertifikat erhält, oder ob er eine Mittelung erhält, die im mitteilt, dass er die Prüfung nicht bestanden hat.
 
 ## Model Class
 
-Die Daten der Prüfung werden in einer Class abgespeichert:
+Die Daten der Prüfung werden in einer Java Klasse abgespeichert:
 
 ```java
 public class CustomerData {
