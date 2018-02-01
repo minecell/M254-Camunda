@@ -6,10 +6,10 @@ In diesem Beispiel geht es darum mithilfe von Camunda TODO's in die Tat umsetzen
 
 ![Ablauf einer Prüfung](src/main/resources/create-customer-rating.png)
 
-Im ersten Formular gibt der Lehrer den Namen des Schülers ein.
-Als nächstes erhält der Schüler eine Prüfung, bei der er seine Antworten frei formulieren muss. 
-Danach kann der Lehrer die Antworten des Schülers mit seinen Lösungen vergleichen und 0 bis 4 Punkte pro Antwort vergeben.
-Im nächsten Schritt berechnet ein Script ob der Schüler mindestens 75% der maximalen Punktzahl erreicht hat.
+Im ersten Formular gibt der Lehrer den Namen des Schülers ein.  
+Als nächstes erhält der Schüler eine Prüfung, bei der er seine Antworten frei formulieren muss.  
+Danach kann der Lehrer die Antworten des Schülers mit seinen Lösungen vergleichen und 0 bis 4 Punkte pro Antwort vergeben.  
+Im nächsten Schritt berechnet ein Script ob der Schüler mindestens 75% der maximalen Punktzahl erreicht hat.  
 Beim Gateway wird entschieden, ob der Schüler sein Zertifikat erhält, oder ob er eine Mittelung erhält, die im mitteilt, dass er die Prüfung nicht bestanden hat.
 
 ## Model Class
