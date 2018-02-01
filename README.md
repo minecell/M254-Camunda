@@ -1,47 +1,37 @@
-# Serialized Objects in Embedded Forms
+# Camunda
 
-This example demonstrates how to work with serialized Java objects in embedded forms.
+In diesem Beispiel geht es darum mithilfe von Camunda TODO in die tat umsetzen
 
-## The BPMN Process used in this example
+## BPMN für dieses Beispiel
 
 ![Create customer rating process](src/main/resources/create-customer-rating.png)
 
-The process is kicked off by a form where the user is supposed to provide data about a customer.
-The process then attempts to calculate a rating using a Java Class. If the rating cannot be
-calculated automatically, a usertask is created and the user has to calculate the rating manually.
+Im ersten Formular gibt der Lehrer den Namen des Schülers eingeben.
+Als nächstes erhält der Schüler eine Prüfung mit bei der er eigene Antworten formulieren muss. 
+Danach kann der Lehrer die Antworten des Schülers mit seinen Lösungen vergleichen und 0 bis 4 Punkte pro Antwort vergeben.
+Im nächsten Schritt berechnet ein Script ob der Schüler mindestens 75% der maximalen Punktzahl erreicht hat.
+Beim Gateway wird entschieden ob der Schüler sein Zertifikat erhält oder ob er eine Mittelung erhält die im mitteilt das er die Prüfung leider nicht bestanden hat.
 
-## Modeling data as Java Objects
+## Model Class
 
-Customer data is modeled using a Java Class:
+Die Daten der Prüfung werden in einer Class abgespeichert:
 
 ```java
 public class CustomerData {
 
-  protected String firstname;
-  protected String lastname;
-  protected boolean isVip;
-  protected float rating;
-  protected List<Address> addresses = new ArrayList<Address>();
+	protected String answer1;
+	protected String answer2;
+	protected String answer3;
+	protected int answer1points;
+	protected int answer2points;
+	protected int answer3points;
+	protected String name;
 
   // ... getters / setters omitted
 }
 ```
 
-The `CustomerData` class provides a collection of addresses. Addresses are modeled like this:
-
-```java
-public class Address {
-
-  protected String street;
-  protected String zipCode;
-  protected String city;
-  protected String country;
-
-  // ... getters / setters omitted
-}
-```
-
-## Creating a Java Object Variable in a Start Form
+## Im ersten Formular wird eine Java Object Variable erstellt
 
 The process instance is started using a form. The form is a plain HTML form which is displayed
 inside Camunda Tasklist (or inside a custom application using the camunda-bpm-sdk-js library).
