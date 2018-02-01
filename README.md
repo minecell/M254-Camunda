@@ -31,71 +31,75 @@ public class CustomerData {
 }
 ```
 
-## Im ersten Formular wird eine Java Object Variable erstellt
+## Objektvariable aus Prozessinstanz erstellen und binden
 
-The process instance is started using a form. The form is a plain HTML form which is displayed
-inside Camunda Tasklist (or inside a custom application using the camunda-bpm-sdk-js library).
+Die Prozessinstanz wird mit einer Form gestarted. Diese besteht aus HTML und JavaScript, welches mit Angular erweitert ist, dass innerhalb der Camunda Tasklist angezeigt wird.
 
 ```html
 <form name="customerForm" role="form">
 
   <script cam-script type="text/form-script">
-
-    // angular form works on scope object
-    var customerData = $scope.customerData = {
-      addresses : []
-    };
-
-    // hook into camunda SDK JS Form Lifecycle
     camForm.on('form-loaded', function() {
-
-      // declare variable 'customerData' incuding metadata for serialization
-      camForm.variableManager.createVariable({
-        name: 'customerData',
-        type: 'Object',
-        value: customerData,
-        valueInfo: {
-          // indicate that object is serialized as json
-          serializationDataFormat: 'application/json',
-          // provide classname of java object
-          objectTypeName: 'org.camunda.bpm.example.usertask.embedded.serialized.model.CustomerData'
-        }
-      });
-
+      // fetch the variable named 'customerData'
+      camForm.variableManager.fetchVariable('customerData');
     });
-
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of customerData to a angular
+      // scope value such that the form can work on it
+      $scope.customerData = camForm.variableManager.variable('customerData').value;
+    });
+    var variableManager = camForm.variableManager;
+    camForm.on('submit', function() {
+      // this callback is executed when the form is submitted, *before* the submit request to
+      // the server is executed
+    });
+  
   </script>
 
-  <h3>Customer Data</h3>
-
+  <h3>BPMN Basic Check</h3>
   <div class="control-group">
-    <label class="control-label" for="firstname">Firstname</label>
+    <label class="control-label" for="answer1">Was ist ein Nomen?</label>
     <div class="controls">
-      <input id="firstname"
+      <input id="answer1"
              class="form-control"
              type="text"
              required 
-             ng-model="customerData.firstname">
+             ng-model="customerData.answer1">
     </div>
+  </div>
 
-  <!-- ... Additional fields ommitted -->
-
+  <div class="control-group">
+    <label class="control-label" for="answer2">Was ist ein Verb?</label>
+    <div class="controls">
+      <input id="answer2"
+             class="form-control"
+             type="text"
+             required
+             ng-model="customerData.answer2">
+    </div>
+  </div>
+  
+    <div class="control-group">
+    <label class="control-label" for="answer3">Was ist ein Adjektiv?</label>
+    <div class="controls">
+      <input id="answer3"
+             class="form-control"
+             type="text"
+             required
+             ng-model="customerData.answer3">
+    </div>
   </div>
 </form>
 ```
 
-The custom java script creates a Javascript Object and binds it to the angular `$scope` of the form
-as a variable named `customerData`. We then hook into the lifecycle of camunda SDK JS Form and
-create a process variable named `customerData` and provide additional type information and metadata
-used for serialization. The Object should be serialized as "application/json" and the type of the
-object is `org.camunda.bpm.example.usertask.embedded.serialized.model.CustomerData`.
+Das benutzerdefinierte JavaScript erstellt ein JavaScript-Objekt und bindet es an den `$scope` von Angular. Dann wird die Prozessvariable `customerData` erstellt und weitere Daten zum Datentyp und zur Serialisierung mitgegeben. Das Objekt soll schlussendlich als JSOn serialisiert werden und von Typ`org.camunda.bpm.example.usertask.embedded.serialized.model.CustomerData` sein.
 
-The form itself is a plain angular js form (see `ng-model` binding of input field).
+Dass die Form an Angular gebunden ist, kann durch das `ng-model` Attribut eines Elements.
 
 
-## Accessing the Object Variable
+## Im Java-Code mit der Objektvariable arbeiten
 
-In a Java Delegate, the `customerData` variable can be retrieved in the regular way:
+In einem Java Delegate kann auf die `customerData` Variable und deren Eigenschaften zugegriffen werden:
 
 ```java
 
@@ -110,32 +114,40 @@ public class CalculateRating implements JavaDelegate {
 }
 ```
 
-## Accessing an existing Java Object Variable in a Task Form
+## Aus einer Task Form auf die Objektvariable zugreifen
 
-In a task form, an existing Java Object variable can be accessed using custom Javascript. The
-pattern is to first fetch the value of the variable and then bind it to an angular scope variable:
+In einer Task Form kann auf existierende Objektvariablen über JavaScript zugegriffen werden. Dabei werden die Werte auch direkt an den Angular `$scope` gebunden:
 
 
-```javascript
-camForm.on('form-loaded', function() {
-  // fetch the variable named 'customerData'
-  camForm.variableManager.fetchVariable('customerData');
-});
+```html
+<form name="customerForm" role="form">
 
-camForm.on('variables-fetched', function() {
-  // after the variables are fetched, bind the value of customerData to a angular
-  // scope value such that the form can work on it
-  $scope.customerData = camForm.variableManager.variable('customerData').value;
-});
+  <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      // fetch the variable named 'customerData'
+      camForm.variableManager.fetchVariable('customerData');
+    });
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of customerData to a angular
+      // scope value such that the form can work on it
+      $scope.customerData = camForm.variableManager.variables["customerData"].value;
+    });
+  </script>
+
+  Du hast <span id="answer1pointsDisplay" ng-model="customerData.answer1points">{{customerData.answer1points + customerData.answer2points + customerData.answer3points}}</span> von 12 möglichen Punkten erreicht.
+
+</form>
 ```
 
 ## Installieren und Starten
 
 1. [Camunda herunterladen](http://camunda.org/download)
-2. Dieses Repsoitory herunterladen
-3. Rechtsklick auf die `pom.xml` -> Run As -> Maven install
-4. Die `.war` Datei in das VErzeichnis `target/` auf dem Servo hochladen
-5. Camunda öffnen [http://localhost:8080/camunda/app/tasklist](http://localhost:8080/camunda/app/tasklist)
-6. Eine neue Prozessinstanz erstellen
+2. Dieses Repsoitory herunterladen resp. clonen
+3. Eclipse starten und das Projekt öffnen
+4. Rechtsklick auf die `pom.xml` -> Run As -> Maven install in Eclipse
+5. Die `.war` Datei in das Verzeichnis `target/` auf dem Server hochladen
+6. Den Apache Tomcat server für Camunda starten
+6. Camunda öffnen [http://localhost:8080/camunda/app/tasklist](http://localhost:8080/camunda/app/tasklist)
+7. Eine neue Prozessinstanz erstellen
 
 
