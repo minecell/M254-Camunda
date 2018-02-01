@@ -13,7 +13,7 @@
       <bpmn2:incoming>SequenceFlow_15w1ar1</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_0igsgko</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="UserTask_1" name="Lehrer bewertet Antworten" camunda:formKey="embedded:app:forms/manual-rating.html">
+    <bpmn2:userTask id="UserTask_1" name="Lehrer bewertet Antworten" camunda:formKey="embedded:app:forms/manual-rating.html" camunda:assignee="demo">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1e8acnu</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -25,14 +25,14 @@
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="ServiceTask_2" targetRef="ExclusiveGateway_1ympn1f" />
     <bpmn2:sequenceFlow id="SequenceFlow_1e8acnu" sourceRef="UserTask_1" targetRef="ServiceTask_2" />
     <bpmn2:sequenceFlow id="SequenceFlow_1fw0kav" sourceRef="Task_1v356yp" targetRef="ServiceTask_1" />
-    <bpmn2:userTask id="Task_1v356yp" name="Schüler beantwortet Fragen" camunda:formKey="embedded:app:forms/provide-customer-data.html">
+    <bpmn2:userTask id="Task_1v356yp" name="Schüler beantwortet Fragen" camunda:formKey="embedded:app:forms/provide-customer-data.html" camunda:assignee="john">
       <bpmn2:documentation><![CDATA[Customer Data
 Sumitted]]></bpmn2:documentation>
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1fw0kav</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_15w1ar1" sourceRef="Task_1c5fzrs" targetRef="EndEvent_1" />
-    <bpmn2:userTask id="Task_1c5fzrs" name="Anzeige &#34;Prüfung bestanden&#34;" camunda:formKey="embedded:app:forms/test-passed.html">
+    <bpmn2:userTask id="Task_1c5fzrs" name="Anzeige &#34;Prüfung bestanden&#34;" camunda:formKey="embedded:app:forms/test-passed.html" camunda:assignee="john">
       <bpmn2:incoming>SequenceFlow_0c2vf82</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_15w1ar1</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -44,7 +44,7 @@ Sumitted]]></bpmn2:documentation>
     <bpmn2:sequenceFlow id="SequenceFlow_0c2vf82" name="nein" sourceRef="ExclusiveGateway_1ympn1f" targetRef="Task_1c5fzrs">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[${points >= 9}]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_0bsaevw" name="Anzeige &#34;Prüfung nicht bestanden&#34;&#10;" camunda:formKey="embedded:app:forms/test-failed.html">
+    <bpmn2:userTask id="UserTask_0bsaevw" name="Anzeige &#34;Prüfung nicht bestanden&#34;&#10;" camunda:formKey="embedded:app:forms/test-failed.html" camunda:assignee="john">
       <bpmn2:incoming>SequenceFlow_11ibq3l</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_0igsgko</bpmn2:outgoing>
     </bpmn2:userTask>
