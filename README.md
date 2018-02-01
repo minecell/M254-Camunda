@@ -129,13 +129,13 @@ camForm.on('variables-fetched', function() {
 });
 ```
 
-## Running the example
+## Installieren und Starten
 
-1. [Download a Camunda BPM Distribution](http://camunda.org/download)
-2. Checkout this repository using Git
-3. Build the example using `mvn clean package`
-4. Deploy the `.war` file located in the `target/` folder to the server
-5. Open Camunda Tasklist using the URL [http://localhost:8080/camunda/app/tasklist](http://localhost:8080/camunda/app/tasklist)
-6. Start a new instance of the Process.
+1. [Camunda herunterladen](http://camunda.org/download)
+2. Dieses Repsoitory herunterladen
+3. Rechtsklick auf die `pom.xml` -> Run As -> Maven install
+4. Die `.war` Datei in das VErzeichnis `target/` auf dem Servo hochladen
+5. Camunda öffnen [http://localhost:8080/camunda/app/tasklist](http://localhost:8080/camunda/app/tasklist)
+6. Eine neue Prozessinstanz erstellen
 
 
