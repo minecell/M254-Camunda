@@ -19,12 +19,10 @@
 
 <h1>BPMN Basic Test</h1>
 <h3>Basic Test NICHT bestanden</h3>
-Du hast nur <span id="reachedPoints"></span> von 12 möglichen Punkten erreicht.
 
 <form name="manualRating" role="form">
 
   <script cam-script type="text/form-script">
-
     camForm.on('form-loaded', function() {
       // fetch the variable named 'customerData'
       camForm.variableManager.fetchVariable('customerData');
@@ -33,9 +31,11 @@ Du hast nur <span id="reachedPoints"></span> von 12 möglichen Punkten erreicht.
     camForm.on('variables-fetched', function() {
       // after the variables are fetched, bind the value of customerData to a angular
       // scope value such that the form can work on it
-      $scope.customerData = camForm.variableManager.variable('customerData').value;
+      $scope.customerData = camForm.variableManager.variables["customerData"].value;
+
     });
 
   </script>
-  <p>a</p>
+
+  Du hast nur <span id="answer1pointsDisplay" ng-model="customerData.answer1points">{{customerData.answer1points + customerData.answer2points + customerData.answer3points}}</span> von 12 möglichen Punkten erreicht.
 </form>

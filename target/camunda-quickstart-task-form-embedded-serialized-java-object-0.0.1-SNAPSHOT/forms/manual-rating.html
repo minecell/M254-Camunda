@@ -1,6 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	$('#answer1points').on('input', function() {
+	/*$('#answer1points').on('input', function() {
 	    localStorage.setItem("answer1points", $("#answer1points").val());
 	});
 	$('#answer2points').on('input', function() {
@@ -14,9 +14,9 @@
 	var answer2 = localStorage.getItem("answer2");
 	var answer3 = localStorage.getItem("answer3");
 
-	$("#answer1").html(answer1);
+	//$("#answer1").html(answer1);
 	$("#answer2").html(answer2);
-	$("#answer3").html(answer3);
+	$("#answer3").html(answer3);*/
 </script>
 
 
@@ -33,41 +33,18 @@
       // after the variables are fetched, bind the value of customerData to a angular
       // scope value such that the form can work on it
       $scope.customerData = camForm.variableManager.variable('customerData').value;
+
     });
 
-    camForm.variableManager.createVariable({
-        name: 'answer1points',
-        type: 'String',
-        value: $("#answer1points").val(),
-        valueInfo: {
-          // indicate that object is serialized as json
-          serializationDataFormat: 'application/json',
-          // provide classname of java object
-          objectTypeName: 'java.lang.String'
-        }
-      });
-      camForm.variableManager.createVariable({
-        name: 'answer2points',
-        type: 'String',
-        value: $("#answer2points").val(),
-        valueInfo: {
-          // indicate that object is serialized as json
-          serializationDataFormat: 'application/json',
-          // provide classname of java object
-          objectTypeName: 'java.lang.String'
-        }
-      });
-      camForm.variableManager.createVariable({
-        name: 'answer3points',
-        type: 'String',
-        value: $("#answer3points").val(),
-        valueInfo: {
-          // indicate that object is serialized as json
-          serializationDataFormat: 'application/json',
-          // provide classname of java object
-          objectTypeName: 'java.lang.String'
-        }
-      });
+    var variableManager = camForm.variableManager;
+
+    camForm.on('submit', function() {
+      // this callback is executed when the form is submitted, *before* the submit request to
+      // the server is executed
+
+
+
+    });
 
   </script>
   <b>{{customerData.name}}</b>
