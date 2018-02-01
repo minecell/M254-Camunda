@@ -44,7 +44,7 @@ Sumitted]]></bpmn2:documentation>
     <bpmn2:sequenceFlow id="SequenceFlow_0c2vf82" name="nein" sourceRef="ExclusiveGateway_1ympn1f" targetRef="Task_1c5fzrs">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[${points >= 9}]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_0bsaevw" name="                          Anzeige &#34;Prüfung nicht bestanden&#34;&#10;" camunda:formKey="embedded:app:forms/test-failed.html">
+    <bpmn2:userTask id="UserTask_0bsaevw" name="Anzeige &#34;Prüfung nicht bestanden&#34;&#10;" camunda:formKey="embedded:app:forms/test-failed.html">
       <bpmn2:incoming>SequenceFlow_11ibq3l</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_0igsgko</bpmn2:outgoing>
     </bpmn2:userTask>
